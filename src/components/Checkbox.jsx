@@ -1,7 +1,7 @@
-import React, {Components} from "react";
+import React, {Component} from "react";
 //import { ReactPropTypes } from 'prop-types';
 
-class Checkbox extends Components{
+class Checkbox extends Component{
     render(){
         const {handleChange} = this.props;
         return(
