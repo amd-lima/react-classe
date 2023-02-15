@@ -1,25 +1,66 @@
-import logo from './logo.svg';
 import './App.css';
+import React, {Component} from 'react';
+import { Aniversario, Checkbox, Idade, Nome, SelectFields } from './components';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+class App extends Component{
+
+    state = {
+      isValid: false,
+      idade: '',
+      nome:'',
+      aniversario: '',
+      carsTypes: 'volvo',
+    };
+  
+  handleChange = ({target}) =>{
+    const {name, type} = target;
+    const value = type === 'checkbox'? target.checked : target.value;
+    this.setState({
+      [name]:value
+    })
+  }
+ 
+  render(){
+    return(
+      <>
+        <form>
+          <Checkbox handleChange={this.handleChange} />
+          <Idade value={this.state.idade} handleChange={this.handleChange}/>
+          <Nome value={this.state.nome} handleChange={this.handleChange}/>
+          <Aniversario value={this.state.aniversario} handleChange={this.handleChange}/>
+          <SelectFields handleChange={this.handleChange} />
+        </form>
+      </>
+    )
+  }
 }
 
+
 export default App;
+
+/*
+  constructor(){
+    super()
+    this.state = {
+      counter: 0
+    };
+  }
+
+  handleClick = () =>{
+    this.setState(((prev, _props) => {
+      counter: prev.counter + 1;
+    }))
+  }
+  render(){
+    return(
+      <>
+        <button onClick={this.handleClick}>contador</button>
+        <h1>O contador está em {this.state.counter}</h1>
+      
+      </>
+    )
+  }
+
+*/
