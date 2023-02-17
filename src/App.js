@@ -1,11 +1,12 @@
 import './App.css';
 import React, {Component} from 'react';
 import { Aniversario, Checkbox, Idade, Nome, SelectFields } from './components';
+import Api from './components/Api';
 
 
 
 class App extends Component{
-
+  
     state = {
       isValid: false,
       idade: '',
@@ -13,6 +14,8 @@ class App extends Component{
       aniversario: '',
       carsTypes: 'volvo',
     };
+  
+  
   
   handleChange = ({target}) =>{
     const {name, type} = target;
@@ -22,7 +25,7 @@ class App extends Component{
     })
   }
  
-  render(){
+  render(){   
     return(
       <>
         <form>
@@ -32,6 +35,7 @@ class App extends Component{
           <Aniversario value={this.state.aniversario} handleChange={this.handleChange}/>
           <SelectFields handleChange={this.handleChange} />
         </form>
+        <Api />        
       </>
     )
   }
