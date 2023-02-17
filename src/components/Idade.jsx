@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { ReactPropTypes } from 'prop-types';
+//import { ReactPropTypes } from 'prop-types';
 
 class Idade extends Component{
    render(){
