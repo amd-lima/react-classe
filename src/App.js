@@ -1,86 +1,83 @@
+import React from 'react';
 import './App.css';
-import React, {Component} from 'react';
-import { Aniversario, Checkbox, Idade, Nome, SelectFields } from './components';
-import Api from './components/Api';
-import { Route, Routes } from 'react-router-dom';
-import Page1 from './folders/Page1';
-import Page2 from './folders/Page2';
-import Page3 from './folders/Page3';
-import NextButtom from './components/NextButtom';
-import BackButtom from './components/BackButtom';
 
-
-
-
-class App extends Component{
-
-  
-  
-    state = {
-      isValid: false,
-      idade: '',
-      nome:'',
-      aniversario: '',
-      carsTypes: 'volvo',
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      joke: '',
     };
-  
-  
-  
-  handleChange = ({target}) =>{
-    const {name, type} = target;
-    const value = type === 'checkbox'? target.checked : target.value;
-    this.setState({
-      [name]:value
-    })
+    
+    this.fetchJoke = this.fetchJoke.bind(this);
   }
- 
-  render(){   
-    return(
-      <>
-        <Routes>
-          <Route path="/" element={<Page1 />} />
-          <Route path="/1" element={<Page2 />} />
-          <Route path="/2" element={<Page3 />} />
-        </Routes>
-        <BackButtom />
-        <NextButtom />
-        <form>
-          <Checkbox handleChange={this.handleChange} />
-          <Idade value={this.state.idade} handleChange={this.handleChange}/>
-          <Nome value={this.state.nome} handleChange={this.handleChange}/>
-          <Aniversario value={this.state.aniversario} handleChange={this.handleChange}/>
-          <SelectFields handleChange={this.handleChange} />
-        </form>
-        <Api />        
-      </>
-    )
+
+  componentDidMount() {
+    this.fetchJoke();
+   }
+   
+   fetchJoke() {
+    const API_URL = 'https://icanhazdadjoke.com/';
+    const REQUEST_CONFIG = { headers: { Accept: 'application/json' } };
+    fetch(API_URL, REQUEST_CONFIG)
+      .then((response) => response.json())
+      .then(({ joke }) => this.setState({ joke }));
+  }
+
+  render() {
+    const { joke } = this.state;
+
+    return (
+      <div className="App">
+        <p>{joke}</p>
+      </div>
+    );
   }
 }
 
-
 export default App;
 
-/*
-  constructor(){
-    super()
-    this.state = {
-      counter: 0
-    };
-  }
 
-  handleClick = () =>{
-    this.setState(((prev, _props) => {
-      counter: prev.counter + 1;
-    }))
-  }
-  render(){
-    return(
-      <>
-        <button onClick={this.handleClick}>contador</button>
-        <h1>O contador está em {this.state.counter}</h1>
+
+// import React, { Component } from 'react'
+// import './App.css';
+// import ValidEmail from './components/validEmail';
+
+// class App extends Component {
+//   constructor() {
+//     super()
+
+//     this.state = {
+//       email: '',
+//       savedEmail: ''
+//     }
+//   }
+
+//   handleEmail = () => {
+//     this.setState({
+//       email: '',
+//       savedEmail: this.state.email
+//     })
+//   }
+
+//   handleInput = ({ target }) => {
+//     this.setState({ email: target.value })
+//   }
+
+//   render(){
+//   return (
+//     <div className="App">
+//       <label htmlFor='my-input'>
+//         email
+//         <input value={ this.state.email } onChange={ this.handleInput } id='my-input' type="email" />
+//       </label>
+//       <input onClick={ this.handleEmail } data-testid='enviar-email' type='button' value='enviar email' />
+//       <button type='button'>
+//         voltar pag anterior
+//       </button>
+//       <ValidEmail email={ this.state.savedEmail } />
       
-      </>
-    )
-  }
+//     </div>
+//   )};
+// }
 
-*/
+// export default App;
