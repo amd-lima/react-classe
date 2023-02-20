@@ -13,9 +13,7 @@ import BackButtom from './components/BackButtom';
 
 
 class App extends Component{
-
-  
-  
+ 
     state = {
       isValid: false,
       idade: '',
@@ -23,9 +21,7 @@ class App extends Component{
       aniversario: '',
       carsTypes: 'volvo',
     };
-  
-  
-  
+ 
   handleChange = ({target}) =>{
     const {name, type} = target;
     const value = type === 'checkbox'? target.checked : target.value;
@@ -56,7 +52,6 @@ class App extends Component{
     )
   }
 }
-
 
 export default App;
 
